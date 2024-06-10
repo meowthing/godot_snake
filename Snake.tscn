@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://e6u4r6cqaf6b"]
+
+[ext_resource type="Script" path="res://Grid.cs" id="1_ai3cu"]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_ai3cu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
