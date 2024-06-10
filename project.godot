@@ -15,6 +15,14 @@ run/main_scene="res://Snake.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=480
+window/size/window_width_override=2400
+window/size/window_height_override=1440
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Snake2D"

@@ -4,9 +4,9 @@ using Vector2 = Godot.Vector2;
 
 public partial class Grid : Node2D
 {
-	private static Vector2 _gridSize = new Vector2(1000, 1000);
+	private static Vector2 _gridSize = new Vector2(800, 480);
 
-	private static Vector2 _cellSize = new Vector2(100, 100);
+	private static Vector2 _cellSize = new Vector2(32, 32);
 	public static Vector2 cellSize { get { return _cellSize; } }
 
 	public static Vector2 cellsAmount
