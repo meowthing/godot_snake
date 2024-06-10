@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "🛠 Debug Game",
-      "type": "coreclr",
+      "type": "godot-mono",
       "request": "launch",
       "preLaunchTask": "build",
       "program": "C:/Godot_v4.2.2-stable_mono_win64/Godot_v4.2.2-stable_mono_win64.exe",
@@ -14,7 +14,7 @@
     },
     {
       "name": "🎭 Debug Current Scene",
-      "type": "coreclr",
+      "type": "godot-mono",
       "request": "launch",
       "preLaunchTask": "build",
       "program": "C:/Godot_v4.2.2-stable_mono_win64/Godot_v4.2.2-stable_mono_win64.exe",
