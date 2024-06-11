@@ -7,8 +7,8 @@ using System.Linq;
 
 public partial class Snake : Node2D
 {
-    private Minisnake head = new Minisnake();
-    private List<Minisnake> minisnakes = new List<Minisnake>();
+    public Minisnake head = new Minisnake();
+    public List<Minisnake> minisnakes = new List<Minisnake>();
     private Vector2 curr_direction = Vector2.Right;
     private Vector2 next_direction = Vector2.Right;
     private Tween tween_move;
@@ -56,12 +56,6 @@ public partial class Snake : Node2D
         {
             next_direction = Vector2.Down;
         }
-
-        //Testing only
-        if (@event.IsActionPressed("grow"))
-        {
-            Grow();
-        }
     }
 
     private void Move()
@@ -83,7 +77,7 @@ public partial class Snake : Node2D
         }
     }
 
-    private void Grow()
+    public void Grow()
     {
         Minisnake ms = new Minisnake();
         Minisnake last_minisnake = minisnakes.Last();
