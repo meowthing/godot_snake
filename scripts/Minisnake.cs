@@ -1,7 +1,7 @@
 
 using System.Windows.Markup;
 using Godot;
-public class Minisnake
+public partial class Minisnake : GodotObject
 {
     public Minisnake() { }
 
@@ -23,6 +23,10 @@ public class Minisnake
     public Rect2 GetRectangle()
     {
         return new Rect2(curr_position, size);
+    }
+
+    public void GoToPrevPosition() {
+        curr_position = prev_position;
     }
 
 }

@@ -1,7 +1,5 @@
 using Vector2 = Godot.Vector2;
 using Godot;
-using System.Numerics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +11,9 @@ public partial class Snake : Node2D
     private Vector2 next_direction = Vector2.Right;
     private Tween tween_move;
 
+    [Signal]
+    public delegate void SnakeHitEventHandler(Minisnake minisnakeHit);
+
 
     public override void _Ready()
     {
@@ -21,8 +22,13 @@ public partial class Snake : Node2D
 
         minisnakes.Add(head);
 
+        // repeatedly call Move with a delay to control how fast
+        // the snake moves
         tween_move = CreateTween().SetLoops();
         tween_move.TweenCallback(Callable.From(Move)).SetDelay(0.15);
+
+        // Bind the signal handler
+        SnakeHit += Hit;
     }
 
     public override void _Process(double delta)
@@ -56,6 +62,12 @@ public partial class Snake : Node2D
         {
             next_direction = Vector2.Down;
         }
+
+        // test
+        if (@event.IsActionPressed("grow"))
+        {
+            Grow();
+        }
     }
 
     private void Move()
@@ -75,6 +87,16 @@ public partial class Snake : Node2D
         {
             minisnakes[i].curr_position = minisnakes[i - 1].prev_position;
         }
+
+        // check for collision between head and snake segments
+        for (int i = 1; i < minisnakes.Count; i++)
+        {
+            if (head.GetRectangle().Intersects(minisnakes[i].GetRectangle()))
+            {
+                EmitSignal(SignalName.SnakeHit, minisnakes[i]);
+                break;
+            }
+        }
     }
 
     public void Grow()
@@ -87,5 +109,23 @@ public partial class Snake : Node2D
         ms.size = Grid.CellSize;
 
         minisnakes.Add(ms);
+    }
+
+    private async void Hit(Minisnake minisnakeHit)
+    {
+        // stop the snake from moving
+        tween_move.Kill();
+
+        // avoid segment position changes affecting other systems 
+        // (i.e. showing which segment the head hit)
+        // by waiting for the next frame to get processed
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
+        // move snake segments back after confirming intersection
+        // to show head position just before disaster strikes
+        foreach (Minisnake ms in minisnakes)
+        {
+            ms.GoToPrevPosition();
+        }
     }
 }

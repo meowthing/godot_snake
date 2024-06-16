@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://e6u4r6cqaf6b"]
+[gd_scene load_steps=5 format=3 uid="uid://e6u4r6cqaf6b"]
 
 [ext_resource type="Script" path="res://scripts/Grid.cs" id="1_6bd50"]
 [ext_resource type="Script" path="res://scripts/Snake.cs" id="2_jirhj"]
 [ext_resource type="Script" path="res://scripts/Spawner_Food.cs" id="3_25aw4"]
+[ext_resource type="Script" path="res://scripts/Hit_Spotter.cs" id="4_bv1lc"]
 
 [node name="Scene" type="Node2D"]
 
@@ -15,3 +16,6 @@ script = ExtResource("2_jirhj")
 
 [node name="Spawner_Food" type="Node2D" parent="."]
 script = ExtResource("3_25aw4")
+
+[node name="Hit_Spotter" type="Node2D" parent="."]
+script = ExtResource("4_bv1lc")
