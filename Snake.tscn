@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://e6u4r6cqaf6b"]
+[gd_scene load_steps=8 format=3 uid="uid://e6u4r6cqaf6b"]
 
 [ext_resource type="Script" path="res://scripts/Grid.cs" id="1_6bd50"]
 [ext_resource type="Script" path="res://scripts/Snake.cs" id="2_jirhj"]
 [ext_resource type="Script" path="res://scripts/Spawner_Food.cs" id="3_25aw4"]
 [ext_resource type="Script" path="res://scripts/Hit_Spotter.cs" id="4_bv1lc"]
+[ext_resource type="Script" path="res://scripts/lbl_score.cs" id="6_4avpa"]
+[ext_resource type="Script" path="res://scripts/ctrl_gameover.cs" id="7_ry4xs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjahh"]
+bg_color = Color(0.137255, 0.129412, 0.239216, 0.498039)
 
 [node name="Scene" type="Node2D"]
 
@@ -19,3 +24,54 @@ script = ExtResource("3_25aw4")
 
 [node name="Hit_Spotter" type="Node2D" parent="."]
 script = ExtResource("4_bv1lc")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ctrl_gameover" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_ry4xs")
+
+[node name="color_rect" type="ColorRect" parent="HUD/ctrl_gameover"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+color = Color(0.137255, 0.129412, 0.239216, 0.498039)
+
+[node name="lbl_gameover" type="Label" parent="HUD/ctrl_gameover"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -11.5
+offset_right = 100.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press [Enter] to play again"
+
+[node name="lbl_score" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_right = 48.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jjahh")
+text = "Ag"
+horizontal_alignment = 1
+script = ExtResource("6_4avpa")

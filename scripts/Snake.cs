@@ -10,13 +10,14 @@ public partial class Snake : Node2D
     private Vector2 curr_direction = Vector2.Right;
     private Vector2 next_direction = Vector2.Right;
     private Tween tween_move;
+    private Game game;
 
     [Signal]
     public delegate void SnakeHitEventHandler(Minisnake minisnakeHit);
 
-
     public override void _Ready()
     {
+        game = (Game)GetNode("/root/Game");
         head.size = Grid.CellSize;
         head.color = Colors.Red;
 
@@ -94,6 +95,7 @@ public partial class Snake : Node2D
             if (head.GetRectangle().Intersects(minisnakes[i].GetRectangle()))
             {
                 EmitSignal(SignalName.SnakeHit, minisnakes[i]);
+                game.EmitSignal(Game.SignalName.GameOver);
                 break;
             }
         }
@@ -109,6 +111,8 @@ public partial class Snake : Node2D
         ms.size = Grid.CellSize;
 
         minisnakes.Add(ms);
+
+        game.Score += 1;
     }
 
     private async void Hit(Minisnake minisnakeHit)

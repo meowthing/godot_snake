@@ -1,8 +1,10 @@
+using System;
 using Godot;
-public partial class Game : Node2D
+
+public partial class Game : Node
 {
-	private static int _score = 0;
-	public static int Score
+	private int _score = 0;
+	public int Score
 	{
 		get
 		{
@@ -16,7 +18,9 @@ public partial class Game : Node2D
 	}
 
 	[Signal]
-	public delegate void ScoreChangedEventHandler();
+	public delegate void ScoreChangedEventHandler(int score);
+	[Signal]
+	public delegate void GameOverEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,5 +32,9 @@ public partial class Game : Node2D
 	{
 	}
 
-
+	public void Restart()
+	{
+		Score = 0;
+		GetTree().ReloadCurrentScene();
+	}
 }

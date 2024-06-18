@@ -37,4 +37,9 @@ public partial class Hit_Spotter : Node2D
 		tween_pulse.TweenProperty(this, "hit_color", Colors.Purple, .55).SetEase(Tween.EaseType.Out);
 		tween_pulse.TweenProperty(this, "hit_color", Colors.Transparent, .55).SetEase(Tween.EaseType.In).SetDelay(.1);
 	}
+
+	public void OnGameOver()
+	{
+		CreateTween().TweenProperty(this, "hit_color", Colors.Purple, .55).SetEase(Tween.EaseType.Out);
+	}
 }
